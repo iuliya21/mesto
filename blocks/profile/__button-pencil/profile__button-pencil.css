@@ -1,0 +1,7 @@
+.profile__button-pencil {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: url(../../../images/edit-button.svg);
+}

@@ -2,4 +2,28 @@
 
 @import url(../vendor/fonts/fonts.css);
 
+@import url(../blocks/content/content.css);
+
 @import url(../blocks/page/page.css);
+
+@import url(../blocks/header/header.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__data/profile__data.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
+@import url(../blocks/profile/__photo/profile__photo.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__button-pencil/profile__button-pencil.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__paragraph/profile__paragraph.css);
+@import url(../blocks/profile/__button/profile__button.css);
+
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/elements/__item/elements__item.css);
+@import url(../blocks/elements/__photo/elements__photo.css);
+@import url(../blocks/elements/__text/elements__text.css);
+@import url(../blocks/elements/__paragraph/elements__paragraph.css);
+@import url(../blocks/elements/__like/elements__like.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__paragraph/footer__paragraph.css);
