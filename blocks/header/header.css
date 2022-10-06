@@ -1,5 +1,19 @@
 .header {
   min-height: 74px;
-  padding-top: 45px;
+  padding: 45px 0 41px;
   border-bottom: solid 1px #545454;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .header {
+    min-height: 56px;
+    padding-left: 8px;
+  }
 }

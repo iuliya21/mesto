@@ -4,4 +4,12 @@
   height: 24px;
   border: none;
   background: url(../../../images/edit-button.svg);
+  background-size: contain;
+}
+
+@media screen and (max-width: 550px) {
+  .profile__button-pencil {
+    width: 18px;
+    height: 18px;
+  }
 }

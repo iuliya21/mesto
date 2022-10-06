@@ -1,9 +1,15 @@
 .profile__info {
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
-  column-gap: 18px;
   font-family: 'Inter';
   font-style: normal;
   color: #FFF;
+  justify-content: center;
+}
+
+@media screen and (max-width: 550px) {
+  .profile__info {
+    row-gap: 14px;
+    text-align: center;
+  }
 }
