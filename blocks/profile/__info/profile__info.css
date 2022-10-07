@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 550px) {
   .profile__info {
-    row-gap: 14px;
     text-align: center;
+    row-gap: 8px;
   }
 }

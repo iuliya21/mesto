@@ -1,0 +1,14 @@
+.profile__button-plus {
+  background-image: url(../../../images/plus.svg);
+  width: 22px;
+  height: 22px;
+  margin: 0 auto;
+  background-size: contain;
+}
+
+@media screen and (max-width: 550px) {
+  .profile__button-plus {
+    width: 16px;
+    height: 16px;
+  }
+}

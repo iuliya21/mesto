@@ -2,12 +2,12 @@
   margin: 0;
   font-weight: 400;
   font-size: 18px;
-  line-height: 1.22;
+  line-height: 22px;
 }
 
 @media screen and (max-width: 550px) {
   .profile__paragraph {
     font-size: 14px;
-    line-height: 1.21;
+    line-height: 17px;
   }
 }

@@ -1,0 +1,18 @@
+.popup__form-text {
+  min-height: 36px;
+  border: none;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  width: 100%;
+  outline: none;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  box-sizing: border-box;
+}
+
+.popup__form-text:last-child {
+  margin-top: 30px;
+}

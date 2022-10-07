@@ -3,10 +3,13 @@
   height: 50px;
   padding: 0;
   border: solid 2px #fff;
-  background: url(../../../images/plus.svg);
-  background-repeat: no-repeat;
-  background-position: center;
   align-self: center;
+  background: none;
+}
+
+.profile__button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {
