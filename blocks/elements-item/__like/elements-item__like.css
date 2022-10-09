@@ -1,4 +1,4 @@
-.elements__like {
+.elements-item__like {
   border: none;
   background: url(../../../images/like.svg);
   width: 22px;
@@ -6,7 +6,7 @@
   padding: 0;
 }
 
-.elements__like:hover {
+.elements-item__like:hover {
   opacity: 0.5;
   cursor: pointer;
 }

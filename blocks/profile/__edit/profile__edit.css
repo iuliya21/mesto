@@ -7,6 +7,6 @@
 @media screen and (max-width: 550px) {
   .profile__edit {
     column-gap: 10px;
-    margin-left: 18px;
+    margin-left: 25px;
   }
 }

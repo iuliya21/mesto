@@ -1,7 +1,7 @@
-.elements__item {
+.elements-item {
   background-color: #fff;
+  padding-bottom: 25px;
   border-radius: 10px;
-  min-height: 361px;
   display: flex;
   flex-direction: column;
   row-gap: 25px;
