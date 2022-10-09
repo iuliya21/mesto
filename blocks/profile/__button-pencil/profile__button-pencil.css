@@ -5,6 +5,7 @@
   border: none;
   background: url(../../../images/edit-button.svg);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .profile__button-pencil:hover {
