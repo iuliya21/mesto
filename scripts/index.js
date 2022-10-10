@@ -1,4 +1,4 @@
-const ModalActiveClass = "popup_opened";
+const modalActiveClass = "popup_opened";
 
 const openModalBtn = document.querySelector(".profile__button-pencil");
 const modal = document.querySelector(".popup");
@@ -17,7 +17,7 @@ function setInput() {
 
 //Функция закрытия окна, при нажатии на крестик
 function closeModal() {
-  modal.classList.remove(ModalActiveClass);
+  modal.classList.remove(modalActiveClass);
 }
 
 //Функция, которая сохраняет введенные значения в форму и закрывает её
@@ -29,7 +29,7 @@ function submitHandlerForm (evt) {
 }
 //Слушатель на кнопку карандаша, который при клике на карандаш, открывает окно формы
 openModalBtn.addEventListener("click", () => {
-  modal.classList.add(ModalActiveClass);
+  modal.classList.add(modalActiveClass);
   setInput();
 });
 
