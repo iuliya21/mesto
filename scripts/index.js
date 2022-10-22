@@ -1,14 +1,14 @@
 const modalActiveClass = "popup_opened";
 
-const openModalBtn = document.querySelector(".profile__button-pencil"); //кнопка редактирования имени и деятельности
-const openNewCardBtn = document.querySelector(".profile__button"); //кнопка добавления новой карточки
+const buttonOpenPopupProfile = document.querySelector(".profile__button-pencil"); //кнопка редактирования имени и деятельности
+const buttonOpenPopupCard = document.querySelector(".profile__button"); //кнопка добавления новой карточки
 const modals = document.querySelectorAll(".popup"); //создаем коллекцию всех попапов
-const modal = document.querySelector(".popup"); //первый попап
-const modalCreateCard = document.querySelector(".popup-card"); //второй попап
-const modalImage = document.querySelector(".popup-image"); //третий попап с увеличенным изображением
+const modal = document.querySelector(".popup_type_edit"); //первый попап
+const modalCreateCard = document.querySelector(".popup_type_card"); //второй попап
+const modalImage = document.querySelector(".popup_type_image"); //третий попап с увеличенным изображением
 const fullImage = document.querySelector(".popup-image__photo");//фото из третьего попапа
-const fullImageDescription = document.querySelector(".popup-image__description");//подпись фото из третьего попапа
-const closeModalBtns = document.querySelectorAll(".popup__button-close"); //все крестики (Node-list)
+const imageOpenFullDescription = document.querySelector(".popup-image__description");//подпись фото из третьего попапа
+const buttonsCloseModal = document.querySelectorAll(".popup__button-close"); //все крестики (Node-list)
 const nameText = document.querySelector(".profile__title");
 const jobText = document.querySelector(".profile__paragraph");
 const formElement = document.querySelector(".popup__form"); //форма для первого попапа
@@ -17,42 +17,14 @@ const jobInput = formElement.querySelector(".popup__form-text_input_job");
 const formPlace = modalCreateCard.querySelector(".popup__form"); //форма для второго попапа
 const placeInput = modalCreateCard.querySelector(".popup__form-text_input_place");
 const linkInput = modalCreateCard.querySelector(".popup__form-text_input_link");
+const place = document.querySelector(".places");
 const list = document.querySelector(".elements");
 const cardTemplateContent = document.querySelector("#template-card").content; //контент template
 const cardItem = cardTemplateContent.querySelector(".elements-item");
 
-//Первоначальный массив карточек: фотографий и названий
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 //функция очистки модального окна: название места и ссылка
 const clearInput = () => {
-  placeInput.value = "";
-  linkInput.value = "";
+  formPlace.reset();
 }
 
 //Функция удаления карточки
@@ -67,28 +39,34 @@ const createItem = (item) => {
   const elementPhoto = element.querySelector(".elements-item__photo");//фотография места
   const btnRemove = element.querySelector(".elements-item__button");
 
+  const openImage = function() {
+    fullImage.alt = item.name;
+    fullImage.src = item.link;
+    imageOpenFullDescription.textContent = item.name;
+    openModal(modalImage);
+  }
+
   btnRemove.addEventListener("click", () => removeCard(element));
   elementName.textContent = item.name;
   elementPhoto.src = item.link;
   elementPhoto.alt = item.name;
-
-  const openImage = function () {
-    fullImage.alt = item.name;
-    fullImage.src = item.link;
-    fullImageDescription.textContent = item.name;
-    modalImage.classList.add(modalActiveClass);
-  }
 
   elementPhoto.addEventListener("click", openImage);
 
   element.querySelector(".elements-item__like").addEventListener("click", function (evt) {
     evt.target.classList.toggle("elements-item__like_active");
   });
-  list.prepend(element);
-  clearInput ();
-};
+  return element;
+}
 
-initialCards.forEach(createItem); //проходим по массиву, создаем карточки
+function renderCard (element) {
+  list.prepend(element);
+}
+
+initialCards.forEach(item => {
+  renderCard(createItem(item));
+});
+
 
 //Функция установки в текстовые поля формы имени и рода деятельности первого исследователя
 function setInput() {
@@ -96,11 +74,14 @@ function setInput() {
   jobInput.value = jobText.textContent;
 }
 
-//Функция закрытия окна, при нажатии на любой крестик
-function closeModal() {
-  modals.forEach((evt) => {
-    evt.classList.remove(modalActiveClass);
-  });
+//Функция открытия окна
+const openModal = function (popup) {
+  popup.classList.add(modalActiveClass);
+}
+
+//Функция закрытия окна
+const closeModal = function (popup) {
+  popup.classList.remove(modalActiveClass);
 }
 
 //Функция, которая сохраняет введенные значения в форму и закрывает её
@@ -108,7 +89,7 @@ function submitHandlerForm(evt) {
   evt.preventDefault();
   nameText.textContent = nameInput.value;
   jobText.textContent = jobInput.value;
-  closeModal();
+  closeModal(modal);
 }
 
 //Функция сохранения информации в новую карточку
@@ -120,28 +101,31 @@ function submitHandlerCard(evt) {
     name: newPlace,
     link: newLink,
   },);
-  closeModal();
+  renderCard();
+  closeModal(modalCreateCard);
 }
 
 //Слушатель на кнопку карандаша, который при клике на карандаш вызывает функцию, которая открывает окно формы
-openModalBtn.addEventListener("click", () => {
-  modal.classList.add(modalActiveClass);
+buttonOpenPopupProfile.addEventListener("click", () => {
+  openModal(modal);
   setInput();
 });
 
 //Слушатель на кнопку добавления новой карточки
-openNewCardBtn.addEventListener("click", () => {
-  modalCreateCard.classList.add(modalActiveClass);
+buttonOpenPopupCard.addEventListener("click", () => {
+  openModal(modalCreateCard);
+  clearInput();
 });
 
 //Слушатель на кнопку-крестик, который запускает функцию закрытия формы
-closeModalBtns.forEach((evt) => {
+buttonsCloseModal.forEach((evt) => {
+  const popup = evt.closest(".popup");
   evt.addEventListener("click", () => {
-    closeModal();
+    closeModal(popup);
   });
 });
 
-//Отправка формы редактиррования имени при событии sumbit
+//Отправка формы редактирования имени при событии sumbit
 formElement.addEventListener("submit", submitHandlerForm);
 
 //Отправка формы добавления карточки
