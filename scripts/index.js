@@ -3,8 +3,11 @@ const modalActiveClass = "popup_opened";
 const openModalBtn = document.querySelector(".profile__button-pencil"); //кнопка редактирования имени и деятельности
 const openNewCardBtn = document.querySelector(".profile__button"); //кнопка добавления новой карточки
 const modals = document.querySelectorAll(".popup"); //создаем коллекцию всех попапов
-const modal = modals[0]; //первый попап
-const modalCreateCard = modals[1]; //второй попап
+const modal = document.querySelector(".popup"); //первый попап
+const modalCreateCard = document.querySelector(".popup-card"); //второй попап
+const modalImage = document.querySelector(".popup-image"); //третий попап с увеличенным изображением
+const fullImage = document.querySelector(".popup-image__photo");//фото из третьего попапа
+const fullImageDescription = document.querySelector(".popup-image__description");//подпись фото из третьего попапа
 const closeModalBtns = document.querySelectorAll(".popup__button-close"); //все крестики (Node-list)
 const nameText = document.querySelector(".profile__title");
 const jobText = document.querySelector(".profile__paragraph");
@@ -61,17 +64,29 @@ const removeCard = (element) => {
 const createItem = (item) => {
   const element = cardItem.cloneNode(true);
   const elementName = element.querySelector(".elements-item__title");
-  const elementPhoto = element.querySelector(".elements-item__photo");
+  const elementPhoto = element.querySelector(".elements-item__photo");//фотография места
   const btnRemove = element.querySelector(".elements-item__button");
+
   btnRemove.addEventListener("click", () => removeCard(element));
   elementName.textContent = item.name;
   elementPhoto.src = item.link;
   elementPhoto.alt = item.name;
+
+  const openImage = function () {
+    fullImage.alt = item.name;
+    fullImage.src = item.link;
+    fullImageDescription.textContent = item.name;
+    modalImage.classList.add(modalActiveClass);
+  }
+
+  elementPhoto.addEventListener("click", openImage);
+
+  element.querySelector(".elements-item__like").addEventListener("click", function (evt) {
+    evt.target.classList.toggle("elements-item__like_active");
+  });
   list.prepend(element);
   clearInput ();
 };
-
-
 
 initialCards.forEach(createItem); //проходим по массиву, создаем карточки
 
