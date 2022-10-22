@@ -22,16 +22,22 @@ const list = document.querySelector(".elements");
 const cardTemplateContent = document.querySelector("#template-card").content; //контент template
 const cardItem = cardTemplateContent.querySelector(".elements-item");
 
+//Функция открытия окна
+const openModal = function (popup) {
+  popup.classList.add(modalActiveClass);
+}
+//Функция закрытия окна
+const closeModal = function (popup) {
+  popup.classList.remove(modalActiveClass);
+}
 //функция очистки модального окна: название места и ссылка
 const clearInput = () => {
   formPlace.reset();
 }
-
 //Функция удаления карточки
 const removeCard = (element) => {
   element.remove();
 }
-
 //Функция создания карточки
 const createItem = (item) => {
   const element = cardItem.cloneNode(true);
@@ -39,12 +45,12 @@ const createItem = (item) => {
   const elementPhoto = element.querySelector(".elements-item__photo");//фотография места
   const btnRemove = element.querySelector(".elements-item__button");
 
-  const openImage = function() {
-    fullImage.alt = item.name;
-    fullImage.src = item.link;
-    imageOpenFullDescription.textContent = item.name;
-    openModal(modalImage);
-  }
+const openImage = function() {
+  fullImage.alt = item.name;
+  fullImage.src = item.link;
+  imageOpenFullDescription.textContent = item.name;
+  openModal(modalImage);
+}
 
   btnRemove.addEventListener("click", () => removeCard(element));
   elementName.textContent = item.name;
@@ -67,21 +73,10 @@ initialCards.forEach(item => {
   renderCard(createItem(item));
 });
 
-
 //Функция установки в текстовые поля формы имени и рода деятельности первого исследователя
 function setInput() {
   nameInput.value = nameText.textContent;
   jobInput.value = jobText.textContent;
-}
-
-//Функция открытия окна
-const openModal = function (popup) {
-  popup.classList.add(modalActiveClass);
-}
-
-//Функция закрытия окна
-const closeModal = function (popup) {
-  popup.classList.remove(modalActiveClass);
 }
 
 //Функция, которая сохраняет введенные значения в форму и закрывает её
@@ -97,11 +92,10 @@ function submitHandlerCard(evt) {
   evt.preventDefault();
   const newPlace = placeInput.value;
   const newLink = linkInput.value;
-  createItem({
+  renderCard(createItem({
     name: newPlace,
     link: newLink,
-  },);
-  renderCard();
+  },));
   closeModal(modalCreateCard);
 }
 
