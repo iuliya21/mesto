@@ -11,8 +11,9 @@
   font-size: 14px;
   line-height: 17px;
   box-sizing: border-box;
+  margin-top: 30px;
 }
 
-.popup__form-text + .popup__form-text {
-  margin-top: 30px;
+.popup__form-text:first-child {
+  margin-top: 0;
 }

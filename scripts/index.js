@@ -12,8 +12,8 @@ const buttonsCloseModal = document.querySelectorAll(".popup__button-close"); //�
 const nameText = document.querySelector(".profile__title");
 const jobText = document.querySelector(".profile__paragraph");
 const formElement = document.querySelector(".popup__form"); //форма для первого попапа
-const nameInput = formElement.querySelector(".popup__form-text_input_name");
-const jobInput = formElement.querySelector(".popup__form-text_input_job");
+const nameInput = formElement.querySelector(".popup__form-text_input_name"); //инпут Имя
+const jobInput = formElement.querySelector(".popup__form-text_input_job"); //инпут Род деятельности
 const formPlace = modalCreateCard.querySelector(".popup__form"); //форма для второго попапа
 const placeInput = modalCreateCard.querySelector(".popup__form-text_input_place");
 const linkInput = modalCreateCard.querySelector(".popup__form-text_input_link");
@@ -42,7 +42,7 @@ const removeCard = (element) => {
 const createItem = (item) => {
   const element = cardItem.cloneNode(true);
   const elementName = element.querySelector(".elements-item__title");
-  const elementPhoto = element.querySelector(".elements-item__photo");//фотография места
+  const elementPhoto = element.querySelector(".elements-item__photo"); //фотография места
   const btnRemove = element.querySelector(".elements-item__button");
 
 const openImage = function() {
@@ -80,7 +80,7 @@ function setInput() {
 }
 
 //Функция, которая сохраняет введенные значения в форму и закрывает её
-function submitHandlerForm(evt) {
+function submitHandlerForm(evt) { 
   evt.preventDefault();
   nameText.textContent = nameInput.value;
   jobText.textContent = jobInput.value;
