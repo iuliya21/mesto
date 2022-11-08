@@ -1,7 +1,14 @@
 // показать текст ошибки
 const showInputError = (inputElement, errorElement, inputErrorClass) => {
+  
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
+  if(errorElement.textContent.length > 110) {
+    errorElement.classList.add("error__changed");
+  }
+  console.log(inputElement);
+  console.log(errorElement);
+  console.log(inputErrorClass);
 }
 
 // спрятать текст ошибки

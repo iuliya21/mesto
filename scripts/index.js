@@ -1,11 +1,9 @@
 const modalActiveClass = "popup_opened";
 
-const buttonOpenPopupProfile = document.querySelector(
-  ".profile__button-pencil"
-); //кнопка редактирования имени и деятельности
+const buttonOpenPopupProfile = document.querySelector(".profile__button-pencil"); //кнопка редактирования имени и деятельности
 const buttonOpenPopupCard = document.querySelector(".profile__button"); //кнопка добавления новой карточки
 const modals = document.querySelectorAll(".popup"); //создаем коллекцию всех попапов
-const modal = document.querySelector(".popup_type_edit"); //первый попап
+const modalEditProfile = document.querySelector(".popup_type_edit"); //первый попап
 const modalCreateCard = document.querySelector(".popup_type_card"); //второй попап
 const modalImage = document.querySelector(".popup_type_image"); //третий попап с увеличенным изображением
 const fullImage = document.querySelector(".popup-image__photo"); //фото из третьего попапа
@@ -92,7 +90,7 @@ function submitHandlerForm(evt) {
   evt.preventDefault();
   nameText.textContent = nameInput.value;
   jobText.textContent = jobInput.value;
-  closeModal(modal);
+  closeModal(modalEditProfile);
 }
 
 //Функция сохранения информации в новую карточку
@@ -111,7 +109,7 @@ function submitHandlerCard(evt) {
 
 //Слушатель на кнопку карандаша, который при клике на карандаш вызывает функцию, которая открывает окно формы
 buttonOpenPopupProfile.addEventListener("click", () => {
-  openModal(modal);
+  openModal(modalEditProfile);
   setInput();
 });
 
@@ -140,7 +138,6 @@ modals.forEach((popup) => {
 
 // функция закрытия попап по клику по оверлею
 modals.forEach((popup) => {
-  const popupContainer = popup.querySelector(".popup__container");
   popup.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("popup")) {
       closeModal(popup)
