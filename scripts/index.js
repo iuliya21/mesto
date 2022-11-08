@@ -140,8 +140,11 @@ modals.forEach((popup) => {
 
 // функция закрытия попап по клику по оверлею
 modals.forEach((popup) => {
-  popup.addEventListener("click", (popup) => {
-    closeModal(popup.target);
+  const popupContainer = popup.querySelector(".popup__container");
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup")) {
+      closeModal(popup)
+    }
   })
 })
 
