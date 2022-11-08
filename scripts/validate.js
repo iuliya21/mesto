@@ -1,26 +1,32 @@
+// показать текст ошибки
 const showInputError = (inputElement, errorElement, inputErrorClass) => {
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 
+// спрятать текст ошибки
 const hideInputError = (inputElement, errorElement, inputErrorClass) => {
   inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = "";
 }
 
-const disableButton = (submitButtonSelector, inactiveButtonClass) => {
-  submitButtonSelector.classList.add(inactiveButtonClass);
-  errorElement.disabled = true;
+const disableButton = (formSubmitButtonElement, inactiveButtonClass) => {
+  formSubmitButtonElement.classList.add(inactiveButtonClass);
+  formSubmitButtonElement.disabled = true;
 }
 
-const enableButton = (submitButtonSelector, inactiveButtonClass) => {
-  submitButtonSelector.classList.remove(inactiveButtonClass);
-  errorElement.disabled = false;
+const enableButton = (formSubmitButtonElement, inactiveButtonClass) => {
+  formSubmitButtonElement.classList.remove(inactiveButtonClass);
+  formSubmitButtonElement.disabled = false;
 }
 
-const toggleButtonState = (submitButtonSelector, inactiveButtonClass) => {
-  disableButton(submitButtonSelector, inactiveButtonClass);
-  enableButton(submitButtonSelector, inactiveButtonClass);
+// переключатель состояние кнопки активная / неактивная
+const toggleButtonState = (formSubmitButtonElement, inactiveButtonClass, buttonState) => {
+  if(buttonState) {
+    disableButton(formSubmitButtonElement, inactiveButtonClass);
+  } else {
+    enableButton(formSubmitButtonElement, inactiveButtonClass);
+  }
 }
 
 const checkInputValidity = (inputElement, errorElement, inputErrorClass) => {
@@ -31,11 +37,16 @@ const checkInputValidity = (inputElement, errorElement, inputErrorClass) => {
   }
 }
 
-const handleFormInput = (evt, form, inputErrorClass, submitButtonSelector, inactiveButtonClass) => {
+const hasInvalidInput = (inputs) => {
+  return inputs.some((input) => !input.validity.valid);
+}
+
+const handleFormInput = (evt, form, inputErrorClass, formSubmitButtonElement, inactiveButtonClass, inputs) => {
   const inputElement = evt.target;
   const errorElement = form.querySelector(`.input-error-${inputElement.name}`);
   checkInputValidity(inputElement, errorElement, inputErrorClass);
-  toggleButtonState(submitButtonSelector, inactiveButtonClass);
+  const buttonState = hasInvalidInput(inputs);
+  toggleButtonState(formSubmitButtonElement, inactiveButtonClass, buttonState);
 };
 
 const enableValidation = (config) => {
@@ -44,10 +55,13 @@ const enableValidation = (config) => {
   const inputErrorClass = config.inputErrorClass;
   const submitButtonSelector = config.submitButtonSelector;
   const inactiveButtonClass = config.inactiveButtonClass;
-  const form = document.querySelector(formSelector);
-  const inputs = modal.querySelectorAll(inputSelector); //все инпуты в модалке редактирования профиля
-  inputs.forEach((inputElement) => {
-    inputElement.addEventListener("input", (evt) => handleFormInput(evt, form, inputErrorClass, submitButtonSelector, inactiveButtonClass));
+  const forms = Array.from(document.querySelectorAll(formSelector)) //массив всех форм
+  forms.forEach(form => {
+    const inputs = Array.from(form.querySelectorAll(inputSelector)); //все инпуты в форме
+    const formSubmitButtonElement = form.querySelector(submitButtonSelector);
+    inputs.forEach((inputElement) => {
+    inputElement.addEventListener("input", (evt) => handleFormInput(evt, form, inputErrorClass, formSubmitButtonElement, inactiveButtonClass, inputs));
+  });
   });
 }
 

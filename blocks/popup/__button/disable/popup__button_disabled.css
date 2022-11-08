@@ -3,3 +3,8 @@
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   color: rgba(0, 0, 0, 0.15);
 }
+
+.popup__button_disabled:hover {
+  cursor: auto;
+  opacity: 1;
+}
