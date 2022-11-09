@@ -1,12 +1,7 @@
 // показать текст ошибки
 const showInputError = (inputElement, errorElement, inputErrorClass) => {
-  
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
-  console.log(errorElement.textContent.length);
-  console.log(inputElement);
-  console.log(errorElement);
-  console.log(inputErrorClass);
 }
 
 // спрятать текст ошибки
