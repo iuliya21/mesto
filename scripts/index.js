@@ -7,9 +7,7 @@ const modalEditProfile = document.querySelector(".popup_type_edit"); //перв�
 const modalCreateCard = document.querySelector(".popup_type_card"); //второй попап
 const modalImage = document.querySelector(".popup_type_image"); //третий попап с увеличенным изображением
 const fullImage = document.querySelector(".popup-image__photo"); //фото из третьего попапа
-const imageOpenFullDescription = document.querySelector(
-  ".popup-image__description"
-); //подпись фото из третьего попапа
+const imageOpenFullDescription = document.querySelector(".popup-image__description"); //подпись фото из третьего попапа
 const buttonsCloseModal = document.querySelectorAll(".popup__button-close"); //все крестики (Node-list)
 const nameText = document.querySelector(".profile__title");
 const jobText = document.querySelector(".profile__paragraph");
@@ -17,9 +15,7 @@ const formElement = document.querySelector(".popup__form"); //форма для 
 const nameInput = formElement.querySelector(".popup__form-text_input_name"); //инпут Имя
 const jobInput = formElement.querySelector(".popup__form-text_input_job"); //инпут Род деятельности
 const formPlace = modalCreateCard.querySelector(".popup__form"); //форма для второго попапа
-const placeInput = modalCreateCard.querySelector(
-  ".popup__form-text_input_place"
-);
+const placeInput = modalCreateCard.querySelector(".popup__form-text_input_place");
 const linkInput = modalCreateCard.querySelector(".popup__form-text_input_link");
 const place = document.querySelector(".places");
 const list = document.querySelector(".elements");
@@ -29,10 +25,12 @@ const cardItem = cardTemplateContent.querySelector(".elements-item");
 //Функция открытия окна
 const openModal = function (popup) {
   popup.classList.add(modalActiveClass);
+  document.addEventListener("keydown", closeByEsc);
 };
 //Функция закрытия окна
 const closeModal = function (popup) {
   popup.classList.remove(modalActiveClass);
+  document.removeEventListener("keydown", closeByEsc);
 };
 //функция очистки модального окна: название места и ссылка
 const clearInput = () => {
@@ -127,14 +125,13 @@ buttonsCloseModal.forEach((evt) => {
   });
 });
 
-// закрытие попапа esc
-modals.forEach((popup) => {
-  document.addEventListener("keydown", (evt) => {
-    if (evt.keyCode === 27) {
-      closeModal(popup);
-    }
-  });
-});
+// функция закрытия по esc
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closeModal(openedPopup);
+  }
+}
 
 // функция закрытия попап по клику по оверлею
 modals.forEach((popup) => {

@@ -2,7 +2,6 @@
   width: 100%;
   min-height: 50px;
   padding: 0;
-  margin-top: 48px;
   border: none;
   border-radius: 2px;
   background-color: #000;
@@ -11,6 +10,7 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  margin-top: 48px;
 }
 
 .popup__button:hover {
