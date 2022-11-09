@@ -8,13 +8,13 @@ const modalCreateCard = document.querySelector(".popup_type_card"); //второ
 const modalImage = document.querySelector(".popup_type_image"); //третий попап с увеличенным изображением
 const fullImage = document.querySelector(".popup-image__photo"); //фото из третьего попапа
 const imageOpenFullDescription = document.querySelector(".popup-image__description"); //подпись фото из третьего попапа
-const buttonsCloseModal = document.querySelectorAll(".popup__button-close"); //все крестики (Node-list)
 const nameText = document.querySelector(".profile__title");
 const jobText = document.querySelector(".profile__paragraph");
 const formElement = document.querySelector(".popup__form"); //форма для первого попапа
 const nameInput = formElement.querySelector(".popup__form-text_input_name"); //инпут Имя
 const jobInput = formElement.querySelector(".popup__form-text_input_job"); //инпут Род деятельности
 const formPlace = modalCreateCard.querySelector(".popup__form"); //форма для второго попапа
+const buttonCreateCard = formPlace.querySelector(".popup__button") //кнопка "создать"
 const placeInput = modalCreateCard.querySelector(".popup__form-text_input_place");
 const linkInput = modalCreateCard.querySelector(".popup__form-text_input_link");
 const place = document.querySelector(".places");
@@ -115,14 +115,8 @@ buttonOpenPopupProfile.addEventListener("click", () => {
 buttonOpenPopupCard.addEventListener("click", () => {
   openModal(modalCreateCard);
   clearInput();
-});
-
-//Слушатель на кнопку-крестик, который запускает функцию закрытия формы
-buttonsCloseModal.forEach((evt) => {
-  const popup = evt.closest(".popup");
-  evt.addEventListener("click", () => {
-    closeModal(popup);
-  });
+  buttonCreateCard.classList.add("popup__button_disabled");
+  buttonCreateCard.setAttribute("disabled", "disabled");
 });
 
 // функция закрытия по esc
@@ -131,16 +125,16 @@ function closeByEsc(evt) {
     const openedPopup = document.querySelector(".popup_opened");
     closeModal(openedPopup);
   }
-}
+};
 
-// функция закрытия попап по клику по оверлею
+// функция закрытия попап по клику по оверлею и крестикам
 modals.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("popup")) {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__button-close")) {
       closeModal(popup)
     }
-  })
-})
+  });
+});
 
 //Отправка формы редактирования имени при событии sumbit
 formElement.addEventListener("submit", submitHandlerForm);
